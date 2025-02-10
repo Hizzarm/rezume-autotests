@@ -38,23 +38,17 @@ export class BasketPage extends BasePage {
      */
     async deleteSecondProduct(): Promise<void> {
         await this.deleteButton.last().click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForSelector('.list-item__wrap', { state: 'attached' }); // Ждём, пока товар исчезнет
     }
-
-    /**
-     * Увеличить количество первого товара на 1
-     */
+    
     async increaseFirstProductQuantity(): Promise<void> {
         await this.plusButton.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForSelector('.count__plus', { state: 'visible' }); // Ждём обновления количества
     }
-
-    /**
-     * Уменьшить количество первого товара на 1
-     */
+    
     async decreaseFirstProductQuantity(): Promise<void> {
         await this.minusButton.click();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForSelector('.count__minus', { state: 'visible' }); // Ждём обновления количества
     }
 
     /**
